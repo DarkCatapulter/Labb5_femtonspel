@@ -7,7 +7,7 @@ package View;
 
 /**
  *
- * @author Faddy
+ * @author Faddy & Hampus
  */
 public class UI {
     

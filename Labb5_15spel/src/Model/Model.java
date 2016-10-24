@@ -7,8 +7,28 @@ package Model;
 
 /**
  *
- * @author Faddy
+ * @author Faddy & Hampus
  */
 public class Model {
+    private Board board;
     
+    public Model(){
+        board = new Board();
+    }
+    
+    public Board returnBoard(){
+        return board;
+    }
+    
+    public void moveTiles(){
+        
+    }
+    
+    public boolean isDone(){
+        return false;
+    }
+    
+    private boolean checkMoveOk(Tile other){
+        return false;
+    }
 }

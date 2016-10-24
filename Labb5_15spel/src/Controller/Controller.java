@@ -5,10 +5,32 @@
  */
 package Controller;
 
+import Model.Model;
+import View.UI;
+
 /**
  *
- * @author Faddy
+ * @author Faddy & Hampus
  */
 public class Controller {
+
+    private final Model model;
+    private final UI ui;
+
+    Controller() {
+        model = new Model();
+        ui = new UI();
+    }
     
+    public void resetBoard(){
+        
+    }
+    
+    public void saveToFile(){
+        
+    }
+    
+    public void loadFromFile(){
+        
+    }
 }
