@@ -4,9 +4,8 @@
  * and open the template in the editor.
  */
 package Model;
-
 import java.util.ArrayList;
-
+ 
 /**
  *
  * @author Faddy
@@ -14,8 +13,6 @@ import java.util.ArrayList;
 public class Board {
 
     private final ArrayList<Tile> tiles;
-    private int height;
-    private int width;
 
     Board() {
         tiles = new ArrayList<>();
@@ -24,17 +21,18 @@ public class Board {
 
     private void initBoard() {
         int column = 0, row = 0;
-        for (int i = 1; i < 15; i++) {
+                tiles.add(new Tile(0, 3, 3));
+        for (int i = 1; i < 16; i++) {
             Tile tile = new Tile(i, column, row);
             addTile(tile);
-            if (!(column == 4)) {
+            if (!(column == 3)) {
                 column++;
             } else {
                 column = 0;
-                row += 16;
+                row++;
             }
         }
-        tiles.add(new Tile(0, column, row));
+
     }
     
     public void resetBoard(){
@@ -73,5 +71,8 @@ public class Board {
     
     private void setGreyRow(int row){
         tiles.get(0).setRow(row);
+    }
+    public Tile getTile(int index){
+        return tiles.get(index);
     }
 }

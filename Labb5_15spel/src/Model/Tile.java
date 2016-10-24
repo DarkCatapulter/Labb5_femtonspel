@@ -4,9 +4,6 @@
  * and open the template in the editor.
  */
 package Model;
-
-import javafx.scene.shape.Rectangle;
-
 /**
  *
  * @author Faddy
@@ -22,7 +19,11 @@ public class Tile{
         this.column = column;
         this.row = row;
     }
-    
+        Tile(){
+        this.number = 0;
+        this.column = 0;
+        this.row = 0;
+    }
     public int getNumber(){
         return number;
     }
@@ -46,4 +47,5 @@ public class Tile{
     public void setRow(int row){
         this.row = row;
     }
+    
 }
