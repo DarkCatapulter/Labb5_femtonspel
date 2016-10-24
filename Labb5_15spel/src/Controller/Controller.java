@@ -19,7 +19,7 @@ public class Controller {
 
     Controller() {
         model = new Model();
-        ui = new UI();
+        ui = new UI(model);
     }
     
     public void resetBoard(){

@@ -5,10 +5,16 @@
  */
 package View;
 
+import Model.Model;
+
 /**
  *
  * @author Faddy & Hampus
  */
 public class UI {
+    private Model model;
     
+    public UI(Model model){
+       this.model = model; 
+    }
 }

@@ -5,58 +5,45 @@
  */
 package Model;
 
+import javafx.scene.shape.Rectangle;
+
 /**
  *
  * @author Faddy
  */
-public class Tile {
+public class Tile{
     private final int number;
-    private final int height;
-    private final int width;
-    private double posX;
-    private double posY;
+    private final int size = 75;
+    private int column;
+    private int row;
     
-    Tile(int number,double posX, double posY){
+    Tile(int number, int column, int row){
         this.number = number;
-        this.height = 15;
-        this.width = this.height;
-        this.posX = posX;
-        this.posY = posY;
-    }
-    
-    Tile(int number, int height, int width, double posX, double posY){
-        this.number = number;
-        this.height = height;
-        this.width = width;
-        this.posX = posX;
-        this.posY = posY;
+        this.column = column;
+        this.row = row;
     }
     
     public int getNumber(){
         return number;
     }
     
-    public int getHeight(){
-        return height;
+    public int getSize(){
+        return size;
     }
     
-    public int getWidth(){
-        return width;
+    public int getColumn(){
+        return column;
     }
     
-    public double getX(){
-        return posX;
+    public int getRow(){
+        return row;
     }
     
-    public double getY(){
-        return posY;
+    public void setColumn(int column){
+        this.column = column;
     }
     
-    public void setX(double x){
-        posX = x;
-    }
-    
-    public void setY(double y){
-        posY = y;
+    public void setRow(int row){
+        this.row = row;
     }
 }
