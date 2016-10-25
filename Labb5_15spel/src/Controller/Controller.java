@@ -5,7 +5,7 @@
  */
 package Controller;
 
-import Model.Model;
+import Model.*;
 import View.UI;
 
 /**
@@ -14,13 +14,13 @@ import View.UI;
  */
 public class Controller {
 
-    private final Model model;
-    private final UI ui;
+  //  private final Model model;
+  //  private final UI ui;
 
-    Controller() {
+   /* Controller() {
         model = new Model();
-        ui = new UI(model);
-    }
+       // ui = new UI(model);
+    }*/
     
     public void resetBoard(){
         

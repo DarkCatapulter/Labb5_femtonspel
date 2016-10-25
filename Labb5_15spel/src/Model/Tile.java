@@ -14,12 +14,12 @@ public class Tile{
     private int column;
     private int row;
     
-    Tile(int number, int column, int row){
+    public Tile(int number, int column, int row){
         this.number = number;
         this.column = column;
         this.row = row;
     }
-        Tile(){
+    public    Tile(){
         this.number = 0;
         this.column = 0;
         this.row = 0;

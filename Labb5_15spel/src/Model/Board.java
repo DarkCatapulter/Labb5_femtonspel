@@ -14,7 +14,7 @@ public class Board {
 
     private final ArrayList<Tile> tiles;
 
-    Board() {
+   public Board() {
         tiles = new ArrayList<>();
         initBoard();
     }
