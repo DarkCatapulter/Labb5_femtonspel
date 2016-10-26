@@ -9,6 +9,7 @@ import Model.*;
 import View.UI;
 import static javafx.application.Application.launch;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
@@ -22,7 +23,7 @@ public class Controller {
     
    private final Model model;
    private UI ui;
-
+    private final Alert alert = new Alert(Alert.AlertType.INFORMATION);
    public Controller(Model model, UI ui) {
         this.model = model;
         this.ui = ui;
@@ -49,7 +50,9 @@ public class Controller {
                         model.returnBoard().findTile(rowIndex, colIndex).setPos(model.returnBoard().getTile(0).getRow(), model.returnBoard().getTile(0).getColumn());
                         model.returnBoard().getTile(0).setColumn(colIndex);
                         model.returnBoard().getTile(0).setRow(rowIndex);
-                        System.out.println(model.returnBoard().isDone());
+                        if(model.returnBoard().isDone()){
+                            showAlert("You have Won!");
+                        }
                     }
                     
     }
@@ -63,5 +66,13 @@ public class Controller {
         public static void main(String[] args) {
         launch();
 
+    }
+            private void showAlert(String message) {
+        if (!alert.isShowing()) {
+            alert.setHeaderText("");
+            alert.setTitle("Alert!");
+            alert.setContentText(message);
+            alert.show();
+        }
     }
 }
