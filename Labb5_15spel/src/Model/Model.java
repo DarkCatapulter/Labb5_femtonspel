@@ -5,6 +5,10 @@
  */
 package Model;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 /**
  *
  * @author Faddy & Hampus
@@ -31,4 +35,5 @@ public class Model {
     private boolean checkMoveOk(Tile other){
         return false;
     }
+
 }

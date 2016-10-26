@@ -6,6 +6,8 @@
 package View;
 
 import Model.*;
+import java.util.HashSet;
+import java.util.Set;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -30,8 +32,8 @@ public class UI extends Application {
 
     private int colIndex;
     private int rowIndex;
-    private Model model;
-    Board board = new Board();
+
+    Model model = new Model();
     Tile tile;
 
     @Override
@@ -40,25 +42,23 @@ public class UI extends Application {
         primaryStage.setTitle("15-Puzzle Game");
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(25, 25, 25, 25));
+        for (int i = 1; i < 16; i++) {
 
-        Tile tmptile = new Tile();
-        for (int i = 0; i < 16; i++) {
-            tmptile = board.getTile(i);
-            Rectangle rect = new Rectangle(tmptile.getSize(), tmptile.getSize());
+            Rectangle rect = new Rectangle(model.returnBoard().getTile(i).getSize(), model.returnBoard().getTile(i).getSize());
             rect.setStroke(Color.BLACK);
             if (i == 0) {
-                rect.setFill(Color.GREY);
+                rect.setFill(null);
             } else {
                 rect.setFill(Color.WHITE);
             }
 
-            Text text = new Text("\t" + tmptile.getNumber());
+            Text text = new Text("\t" + model.returnBoard().getTile(i).getNumber());
             text.setFont(Font.font(20));
-
-            grid.add(rect, tmptile.getColumn(), tmptile.getRow());
+            grid.add(rect, model.returnBoard().getTile(i).getColumn(), model.returnBoard().getTile(i).getRow());
             if (i != 0) {
-                grid.add(text, tmptile.getColumn(), tmptile.getRow());
+                grid.add(text, model.returnBoard().getTile(i).getColumn(), model.returnBoard().getTile(i).getRow());
             }
+
             rect.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -67,6 +67,23 @@ public class UI extends Application {
                     setRowIndex(GridPane.getRowIndex(source));
                     System.out.println(colIndex);
                     System.out.println(rowIndex);
+                    if (model.returnBoard().checkMoveOk(model.returnBoard().findTile(rowIndex, colIndex))) {
+                        System.out.println("test" + model.returnBoard().findTile(rowIndex, colIndex));
+                        
+                      System.out.println("ggggg "  + model.returnBoard().findTile(rowIndex, colIndex));
+                    
+                        
+                        grid.getChildren().remove(rect);
+                        grid.getChildren().remove(text);
+                        grid.add(rect, model.returnBoard().getTile(0).getColumn(), model.returnBoard().getTile(0).getRow());
+                        grid.add(text, model.returnBoard().getTile(0).getColumn(), model.returnBoard().getTile(0).getRow());
+                         model.returnBoard().findTile(rowIndex, colIndex).setPos(model.returnBoard().getTile(0).getRow(), model.returnBoard().getTile(0).getColumn());
+
+                       model.returnBoard().getTile(0).setColumn(colIndex);
+                       model.returnBoard().getTile(0).setRow(rowIndex);
+     
+                    }
+                    System.out.println(model.returnBoard().checkMoveOk(model.returnBoard().findTile(rowIndex, colIndex)));
 
                 }
             });
@@ -80,9 +97,30 @@ public class UI extends Application {
                     System.out.println(colIndex);
                     System.out.println(rowIndex);
 
+                    if (model.returnBoard().checkMoveOk(model.returnBoard().findTile(rowIndex, colIndex))) {
+                        System.out.println("hej" + model.returnBoard().findTile(rowIndex, colIndex));
+                                           
+                        grid.getChildren().remove(rect);
+                        grid.getChildren().remove(text);
+                        grid.add(rect, model.returnBoard().getTile(0).getColumn(), model.returnBoard().getTile(0).getRow());
+                        grid.add(text, model.returnBoard().getTile(0).getColumn(), model.returnBoard().getTile(0).getRow());
+                       
+                        
+                        model.returnBoard().findTile(rowIndex, colIndex).setPos(model.returnBoard().getTile(0).getRow(), model.returnBoard().getTile(0).getColumn());
+                        model.returnBoard().getTile(0).setColumn(colIndex);
+                       model.returnBoard().getTile(0).setRow(rowIndex);
+                    }
+                    System.out.println(model.returnBoard().checkMoveOk(model.returnBoard().findTile(rowIndex, colIndex)));
                 }
             });
         }
+
+        //Button
+        Button btn = new Button("reset");
+        HBox hbBtn = new HBox(10);
+        hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
+        hbBtn.getChildren().add(btn);
+        grid.add(hbBtn, 3, 4);
 
         Scene scene = new Scene(grid, 400, 400);
         primaryStage.setScene(scene);
@@ -98,4 +136,12 @@ public class UI extends Application {
         this.colIndex = colIndex;
     }
 
+    private void paintGrayTile(int row, int Col, GridPane grid) {
+
+        Rectangle rect = new Rectangle(model.returnBoard().getTile(0).getSize(), model.returnBoard().getTile(0).getSize());
+        rect.setStroke(Color.BLACK);
+        rect.setFill(Color.GREY);
+        grid.setColumnIndex(rect, colIndex);
+        grid.setRowIndex(rect, rowIndex);
+    }
 }

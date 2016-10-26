@@ -47,5 +47,9 @@ public class Tile{
     public void setRow(int row){
         this.row = row;
     }
+  public void setPos(int row, int col){
+      this.row = row;
+      this.column = col;
+  }
     
 }
