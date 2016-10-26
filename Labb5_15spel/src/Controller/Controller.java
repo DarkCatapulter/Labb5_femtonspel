@@ -8,7 +8,6 @@ package Controller;
 import Model.*;
 import View.UI;
 import static javafx.application.Application.launch;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -56,8 +55,12 @@ public class Controller {
                     }
                     
     }
-    
-    
+    public void handleReset(){
+        model.returnBoard().resetBoard();
+    }
+    public void handleQuit(){
+        System.exit(0);
+    }
     
     
     

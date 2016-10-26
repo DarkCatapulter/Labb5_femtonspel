@@ -5,10 +5,6 @@
  */
 package Model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-
 /**
  *
  * @author Faddy & Hampus
@@ -24,16 +20,5 @@ public class Model {
         return board;
     }
     
-    public void moveTiles(){
-        
-    }
-    
-    public boolean isDone(){
-        return false;
-    }
-    
-    private boolean checkMoveOk(Tile other){
-        return false;
-    }
 
 }

@@ -7,18 +7,18 @@ package View;
 
 import Model.*;
 import Controller.*;
-import java.util.HashSet;
-import java.util.Set;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -33,7 +33,7 @@ public class UI extends Application {
 
     private int colIndex;
     private int rowIndex;
-
+    private VBox root;
     private Model model;
     Tile tile;
     
@@ -43,11 +43,40 @@ public class UI extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        
+        
         Controller controller = new Controller(model, this);
         primaryStage.setTitle("15-Puzzle Game");
         GridPane grid = new GridPane();
-        grid.setPadding(new Insets(25, 25, 25, 25));
-        for (int i = 1; i < 16; i++) {
+        //grid.setPadding(new Insets(25, 25, 25, 25));
+        create(grid,controller);
+        createMenu(grid,controller);
+        
+        Scene scene = new Scene(grid, 304, 333);       
+        primaryStage.setScene(scene);
+        
+        primaryStage.show();
+
+    }
+
+    public void setRowIndex(int RowIndex) {
+        this.rowIndex = RowIndex;
+    }
+
+    public void setColIndex(int colIndex) {
+        this.colIndex = colIndex;
+    }
+    public void setIndex(int colIndex,int rowIndex){
+        this.colIndex = colIndex;
+        this.rowIndex = rowIndex;
+    }
+    private void handlePosID(MouseEvent event) {
+        Node source = (Node) event.getSource();
+        setColIndex(GridPane.getColumnIndex(source));
+        setRowIndex(GridPane.getRowIndex(source));
+    }
+    public void create(GridPane grid,Controller controller){
+                for (int i = 1; i < 16; i++) {
 
             Rectangle rect = new Rectangle(model.returnBoard().getTile(i).getSize(), model.returnBoard().getTile(i).getSize());
             rect.setStroke(Color.BLACK);
@@ -80,34 +109,33 @@ public class UI extends Application {
                 }
             });
         }
-
-        Scene scene = new Scene(grid, 350, 350);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
+        
     }
-
-    public void setRowIndex(int RowIndex) {
-        this.rowIndex = RowIndex;
-    }
-
-    public void setColIndex(int colIndex) {
-        this.colIndex = colIndex;
-    }
-    public void setIndex(int colIndex,int rowIndex){
-        this.colIndex = colIndex;
-        this.rowIndex = rowIndex;
-    }
-
-
-
-
-    private void handlePosID(MouseEvent event) {
-        Node source = (Node) event.getSource();
-        setColIndex(GridPane.getColumnIndex(source));
-        setRowIndex(GridPane.getRowIndex(source));
-        System.out.println(colIndex);
-        System.out.println(rowIndex);
-
+    public void createMenu(GridPane grid,Controller controller){
+                Menu fileMenu = new Menu("Menu");
+        MenuItem reset = new MenuItem("New Game");
+        
+        reset.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    controller.handleReset();
+                    grid.getChildren().clear();
+                    createMenu(grid,controller);
+                    create(grid,controller);
+                }
+            });
+        
+        MenuItem exit= new MenuItem("Quit");
+               exit.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    controller.handleQuit();
+                }
+            }); 
+        
+        fileMenu.getItems().addAll(reset,exit);
+        MenuBar menuBar = new MenuBar();
+        menuBar.getMenus().add(fileMenu);
+        grid.add(menuBar,0,0,4,1);
     }
 }

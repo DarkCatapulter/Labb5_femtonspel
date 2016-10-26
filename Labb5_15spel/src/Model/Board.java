@@ -6,8 +6,6 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 /**
  *
@@ -25,8 +23,8 @@ public class Board {
     }
 
     private void initBoard() {
-        int column = 0, row = 0;
-        tiles.add(new Tile(0, 3, 3));
+        int column = 0, row = 1;
+        tiles.add(new Tile(0, 3, 4));
 
         for (int i = 1; i < 16; i++) {
             Tile tile = new Tile(i, column, row);
@@ -40,87 +38,9 @@ public class Board {
         }
 
     }
-
-    private void initBoardPreSet() {
-        int rand = 0;
-        tiles.add(new Tile(0, 3, 3));
-        rand = (int) (Math.random() * 3 + 1);
-        switch (rand) {
-            case 1:
-                tiles.add(new Tile(1, 3, 0));
-                tiles.add(new Tile(2, 1, 2));
-                tiles.add(new Tile(3, 2, 2)); 
-                tiles.add(new Tile(4, 0, 3));
-                tiles.add(new Tile(5, 1, 0));
-                tiles.add(new Tile(6, 1, 3));
-                tiles.add(new Tile(7, 0, 1));
-                tiles.add(new Tile(8, 3, 1));
-                tiles.add(new Tile(9, 0, 0));
-                tiles.add(new Tile(10, 0, 2));
-                tiles.add(new Tile(11, 3, 2));
-                tiles.add(new Tile(12, 2, 3));
-                tiles.add(new Tile(13, 2, 0));
-                tiles.add(new Tile(14, 1, 1));
-                tiles.add(new Tile(15, 2, 1));
-                break;
-            case 2:
-                tiles.add(new Tile(1, 1, 1));
-                tiles.add(new Tile(2, 2, 3));
-                tiles.add(new Tile(3, 2, 2));
-                tiles.add(new Tile(4, 0, 3));
-                tiles.add(new Tile(5, 0, 2));
-                tiles.add(new Tile(6, 3, 0));
-                tiles.add(new Tile(7, 3, 1));
-                tiles.add(new Tile(8, 1, 3));
-                tiles.add(new Tile(9, 1, 2));
-                tiles.add(new Tile(10, 1, 0));
-                tiles.add(new Tile(11, 0, 1));
-                tiles.add(new Tile(12, 2, 0));
-                tiles.add(new Tile(13, 3, 2));
-                tiles.add(new Tile(14, 0, 0));
-                tiles.add(new Tile(15, 2, 1));
-                break;
-                
-            case 3:
-                tiles.add(new Tile(1, 2, 0));
-                tiles.add(new Tile(2, 2, 1));
-                tiles.add(new Tile(3, 1, 1));
-                tiles.add(new Tile(4, 3, 2));
-                tiles.add(new Tile(5, 0, 0));
-                tiles.add(new Tile(6, 3, 1));
-                tiles.add(new Tile(7, 2, 3));
-                tiles.add(new Tile(8, 1, 2));
-                tiles.add(new Tile(9, 1, 3));
-                tiles.add(new Tile(10, 1, 0));
-                tiles.add(new Tile(11, 0, 3));
-                tiles.add(new Tile(12, 0, 2));
-                tiles.add(new Tile(13, 0, 1));
-                tiles.add(new Tile(14, 2, 2));
-                tiles.add(new Tile(15, 3, 0));
-                break;
-            case 4:
-                tiles.add(new Tile(1, 0, 3));
-                tiles.add(new Tile(2, 1, 3));
-                tiles.add(new Tile(3, 3, 0));
-                tiles.add(new Tile(4, 0, 1));
-                tiles.add(new Tile(5, 0, 0));
-                tiles.add(new Tile(6, 0, 2));
-                tiles.add(new Tile(7, 2, 0));
-                tiles.add(new Tile(8, 1, 0));
-                tiles.add(new Tile(9, 2, 1));
-                tiles.add(new Tile(10, 2, 3));
-                tiles.add(new Tile(11, 3, 1));
-                tiles.add(new Tile(12, 3, 2));
-                tiles.add(new Tile(13, 1, 2));
-                tiles.add(new Tile(14, 2, 2));
-                tiles.add(new Tile(15, 1, 1));
-                break;
-
-        }
-    }
-
     public void resetBoard() {
-
+        tiles.removeAll(tiles);
+        initBoardPreSet();
     }
 
     public ArrayList<Tile> getBoard() {
@@ -163,12 +83,12 @@ public class Board {
     }
 
    public boolean isDone() {
-        int column = 0, row = 0;
+        int column = 0, row = 1;
         for (int i = 1; i < 16; i++) {
             if(!(tiles.get(i).getColumn() == column && tiles.get(i).getRow() == row)){
                 return false;
             }
-            if (column == 2 && row == 3){
+            if (column == 2 && row == 4){
                    
                 return true;
             }
@@ -209,5 +129,81 @@ public class Board {
         }
         return tmp;
     }
+   private void initBoardPreSet() {
+        int rand = 0;
+        tiles.add(new Tile(0, 3, 4));
+        rand = (int) (Math.random() * 3 + 1);
+        switch (rand) {
+            case 1:
+                tiles.add(new Tile(1, 3, 1));
+                tiles.add(new Tile(2, 1, 3));
+                tiles.add(new Tile(3, 2, 3)); 
+                tiles.add(new Tile(4, 0, 4));
+                tiles.add(new Tile(5, 1, 1));
+                tiles.add(new Tile(6, 1, 4));
+                tiles.add(new Tile(7, 0, 2));
+                tiles.add(new Tile(8, 3, 2));
+                tiles.add(new Tile(9, 0, 1));
+                tiles.add(new Tile(10, 0, 3));
+                tiles.add(new Tile(11, 3, 3));
+                tiles.add(new Tile(12, 2, 4));
+                tiles.add(new Tile(13, 2, 1));
+                tiles.add(new Tile(14, 1, 2));
+                tiles.add(new Tile(15, 2, 2));
+                break;
+            case 2:
+                tiles.add(new Tile(1, 1, 2));
+                tiles.add(new Tile(2, 2, 4));
+                tiles.add(new Tile(3, 2, 3));
+                tiles.add(new Tile(4, 0, 4));
+                tiles.add(new Tile(5, 0, 3));
+                tiles.add(new Tile(6, 3, 1));
+                tiles.add(new Tile(7, 3, 2));
+                tiles.add(new Tile(8, 1, 4));
+                tiles.add(new Tile(9, 1, 3));
+                tiles.add(new Tile(10, 1, 1));
+                tiles.add(new Tile(11, 0, 2));
+                tiles.add(new Tile(12, 2, 1));
+                tiles.add(new Tile(13, 3, 3));
+                tiles.add(new Tile(14, 0, 1));
+                tiles.add(new Tile(15, 2, 2));
+                break;
+                
+            case 3:
+                tiles.add(new Tile(1, 2, 1));
+                tiles.add(new Tile(2, 2, 2));
+                tiles.add(new Tile(3, 1, 2));
+                tiles.add(new Tile(4, 3, 3));
+                tiles.add(new Tile(5, 0, 1));
+                tiles.add(new Tile(6, 3, 2));
+                tiles.add(new Tile(7, 2, 4));
+                tiles.add(new Tile(8, 1, 3));
+                tiles.add(new Tile(9, 1, 4));
+                tiles.add(new Tile(10, 1, 1));
+                tiles.add(new Tile(11, 0, 4));
+                tiles.add(new Tile(12, 0, 3));
+                tiles.add(new Tile(13, 0, 2));
+                tiles.add(new Tile(14, 2, 3));
+                tiles.add(new Tile(15, 3, 1));
+                break;
+            case 4:
+                tiles.add(new Tile(1, 0, 4));
+                tiles.add(new Tile(2, 1, 4));
+                tiles.add(new Tile(3, 3, 1));
+                tiles.add(new Tile(4, 0, 2));
+                tiles.add(new Tile(5, 0, 1));
+                tiles.add(new Tile(6, 0, 3));
+                tiles.add(new Tile(7, 2, 1));
+                tiles.add(new Tile(8, 1, 1));
+                tiles.add(new Tile(9, 2, 2));
+                tiles.add(new Tile(10, 2, 4));
+                tiles.add(new Tile(11, 3, 2));
+                tiles.add(new Tile(12, 3, 3));
+                tiles.add(new Tile(13, 1, 3));
+                tiles.add(new Tile(14, 2, 3));
+                tiles.add(new Tile(15, 1, 2));
+                break;
 
+        }
+    }
 }
