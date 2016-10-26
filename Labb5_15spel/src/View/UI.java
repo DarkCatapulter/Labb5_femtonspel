@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package View;
 
 import Model.*;
@@ -10,7 +5,6 @@ import Controller.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
@@ -18,7 +12,6 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -27,56 +20,83 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Faddy & Hampus
+ * @author Fatih Yalcin and Hampus Glantz
  */
 public class UI extends Application {
 
     private int colIndex;
     private int rowIndex;
-    private VBox root;
-    private Model model;
-    Tile tile;
-    
-    public UI(){
+    private final Model model;
+
+    public UI() {
         model = new Model();
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        
-        
+
         Controller controller = new Controller(model, this);
         primaryStage.setTitle("15-Puzzle Game");
         GridPane grid = new GridPane();
-        //grid.setPadding(new Insets(25, 25, 25, 25));
-        create(grid,controller);
-        createMenu(grid,controller);
-        
-        Scene scene = new Scene(grid, 304, 333);       
+        create(grid, controller);
+        createMenu(grid, controller);
+
+        Scene scene = new Scene(grid, 304, 333);
         primaryStage.setScene(scene);
-        
         primaryStage.show();
 
     }
 
+    /**
+     * Store the clicked node's row in its local variable
+     *
+     * @param RowIndex
+     */
     public void setRowIndex(int RowIndex) {
         this.rowIndex = RowIndex;
     }
 
+    /**
+     * Store the clicked node's column in its local variable
+     *
+     * @param colIndex
+     */
     public void setColIndex(int colIndex) {
         this.colIndex = colIndex;
     }
-    public void setIndex(int colIndex,int rowIndex){
+
+    /**
+     * Store the clicked node's Column, Row in its local variables
+     *
+     * @param colIndex
+     * @param rowIndex
+     */
+    public void setIndex(int colIndex, int rowIndex) {
         this.colIndex = colIndex;
         this.rowIndex = rowIndex;
     }
+
+    /**
+     * Set the position for where you have clicked and store them in colIndex
+     * and rowIndex by using their set methods
+     *
+     * @param event MouseEvent
+     */
     private void handlePosID(MouseEvent event) {
         Node source = (Node) event.getSource();
         setColIndex(GridPane.getColumnIndex(source));
         setRowIndex(GridPane.getRowIndex(source));
     }
-    public void create(GridPane grid,Controller controller){
-                for (int i = 1; i < 16; i++) {
+
+    /**
+     * Creates the items that are displayed in nodes, which in this case are
+     * Tiles Creates Eventhandler for each object
+     *
+     * @param grid GridPane
+     * @param controller Controller
+     */
+    public void create(GridPane grid, Controller controller) {
+        for (int i = 1; i < 16; i++) {
 
             Rectangle rect = new Rectangle(model.returnBoard().getTile(i).getSize(), model.returnBoard().getTile(i).getSize());
             rect.setStroke(Color.BLACK);
@@ -97,7 +117,7 @@ public class UI extends Application {
                 @Override
                 public void handle(MouseEvent event) {
                     handlePosID(event);
-                    controller.handleClick(event, rect, text, grid,colIndex,rowIndex);
+                    controller.handleClick(event, rect, text, grid, colIndex, rowIndex);
                 }
             });
             //  EVENTHANDLER FOR MOUSE ON TEXT
@@ -105,37 +125,46 @@ public class UI extends Application {
                 @Override
                 public void handle(MouseEvent event) {
                     handlePosID(event);
-                    controller.handleClick(event, rect, text, grid,colIndex,rowIndex);
+                    controller.handleClick(event, rect, text, grid, colIndex, rowIndex);
                 }
             });
         }
-        
+
     }
-    public void createMenu(GridPane grid,Controller controller){
-                Menu fileMenu = new Menu("Menu");
+
+    /**
+     * Creates a new Menubar with items and Evenhandler
+     *
+     * @param grid GridPane
+     * @param controller Controller
+     */
+    public void createMenu(GridPane grid, Controller controller) {
+        Menu fileMenu = new Menu("Menu");
         MenuItem reset = new MenuItem("New Game");
-        
+
+        // Eventhandler for menu option reset
         reset.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    controller.handleReset();
-                    grid.getChildren().clear();
-                    createMenu(grid,controller);
-                    create(grid,controller);
-                }
-            });
-        
-        MenuItem exit= new MenuItem("Quit");
-               exit.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    controller.handleQuit();
-                }
-            }); 
-        
-        fileMenu.getItems().addAll(reset,exit);
+            @Override
+            public void handle(ActionEvent event) {
+                controller.handleReset();
+                grid.getChildren().clear();
+                createMenu(grid, controller);
+                create(grid, controller);
+            }
+        });
+
+        MenuItem exit = new MenuItem("Quit");
+        // Eventhandler for menu option Quit
+        exit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                controller.handleQuit();
+            }
+        });
+
+        fileMenu.getItems().addAll(reset, exit);
         MenuBar menuBar = new MenuBar();
         menuBar.getMenus().add(fileMenu);
-        grid.add(menuBar,0,0,4,1);
+        grid.add(menuBar, 0, 0, 4, 1);
     }
 }

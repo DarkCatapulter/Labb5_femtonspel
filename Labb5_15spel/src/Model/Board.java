@@ -1,27 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Model;
 
+package Model;
 import java.util.ArrayList;
 
 /**
  *
- * @author Faddy
+ * @author Fatih Yalcin and Hampus Glantz
  */
 public class Board {
 
     private final ArrayList<Tile> tiles;
     Tile tile;
-
+/**
+ *  Constructor take no parrameters and creates a new full array with tiles
+ */
     public Board() {
         tiles = new ArrayList<>();
         initBoard();
-      //  initBoardPreSet();
+    
     }
-
+/**
+ * Initalize the board in finnished state
+ */
     private void initBoard() {
         int column = 0, row = 1;
         tiles.add(new Tile(0, 3, 4));
@@ -38,26 +37,24 @@ public class Board {
         }
 
     }
+    /**
+     * Empty the tiles array and fill int with scrambled tiles
+     */
     public void resetBoard() {
         tiles.removeAll(tiles);
         initBoardPreSet();
     }
-
+/**
+ * 
+ * @return arraylist tiles
+ */
     public ArrayList<Tile> getBoard() {
         return tiles;
     }
- 
-
-    public void swapTiles(int index) {
-        int tempColumn, tempRow;
-        tempColumn = getGreyColumn();
-        tempRow = getGreyRow();
-        setGreyColumn(tiles.get(index).getColumn());
-        setGreyRow(tiles.get(index).getRow());
-        tiles.get(index).setColumn(tempColumn);
-        tiles.get(index).setRow(tempRow);
-    }
-
+ /**
+  * adds a tile to the arraylist tiles
+  * @param tile 
+  */
     public void addTile(Tile tile) {
         tiles.add(tile);
     }
@@ -77,11 +74,18 @@ public class Board {
     private void setGreyRow(int row) {
         tiles.get(0).setRow(row);
     }
-
+/**
+ * get tile at specified index
+ * @param index
+ * @return tile
+ */
     public Tile getTile(int index) {
         return tiles.get(index);
     }
-
+/**
+ * check if all the tiles are in correct position
+ * @return boolean
+ */
    public boolean isDone() {
         int column = 0, row = 1;
         for (int i = 1; i < 16; i++) {
@@ -102,7 +106,11 @@ public class Board {
         }
         return false;
     }
-
+/**
+ * Checks if the tile that is clicked is located beside the the grey tile
+ * @param other
+ * @return boolean
+ */
     public boolean checkMoveOk(Tile other) {
         if (tiles.get(0).getColumn() == other.getColumn() || tiles.get(0).getRow() == other.getRow()) {
             if (tiles.get(0).getColumn() == other.getColumn() + 1
@@ -116,7 +124,12 @@ public class Board {
         return false;
 
     }
-
+/**
+ * search after a tile in the arraylist using the tiles node position
+ * @param row
+ * @param col
+ * @return 
+ */
     public Tile findTile(int row, int col) {
         Tile tmp = new Tile();
         for (Tile tile : tiles) {
@@ -129,6 +142,9 @@ public class Board {
         }
         return tmp;
     }
+    /**
+     * Initialize the board with scrambled tiles
+     */
    private void initBoardPreSet() {
         int rand = 0;
         tiles.add(new Tile(0, 3, 4));
