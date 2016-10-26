@@ -21,6 +21,7 @@ public class Board {
     public Board() {
         tiles = new ArrayList<>();
         initBoard();
+      //  initBoardPreSet();
     }
 
     private void initBoard() {
@@ -165,19 +166,16 @@ public class Board {
         int column = 0, row = 0;
         for (int i = 1; i < 16; i++) {
             if(!(tiles.get(i).getColumn() == column && tiles.get(i).getRow() == row)){
-                System.out.println(column+"  "+row+"   "+tiles.get(i).getNumber()+" : 1");
                 return false;
             }
             if (column == 2 && row == 3){
-                   System.out.println(column+"  "+row+" "+tiles.get(i).getNumber()+" : 3");
+                   
                 return true;
             }
             else if (!(column == 3)) {
-                   System.out.println(column+"  "+row+"   "+tiles.get(i).getNumber()+" : 2");
                 column++;
             } 
             else {
-                   System.out.println(column+"  "+row+"   "+tiles.get(i).getNumber()+" : 4");
                 column = 0;
                 row++;
             }
@@ -186,9 +184,6 @@ public class Board {
     }
 
     public boolean checkMoveOk(Tile other) {
-
-        System.out.println(tiles.get(0).getColumn() + "   " + tiles.get(0).getRow());
-        System.out.println(other);
         if (tiles.get(0).getColumn() == other.getColumn() || tiles.get(0).getRow() == other.getRow()) {
             if (tiles.get(0).getColumn() == other.getColumn() + 1
                     || tiles.get(0).getColumn() == other.getColumn() - 1
