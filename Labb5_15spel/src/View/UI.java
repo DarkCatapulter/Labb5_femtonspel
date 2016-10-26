@@ -69,19 +69,18 @@ public class UI extends Application {
                     System.out.println(rowIndex);
                     if (model.returnBoard().checkMoveOk(model.returnBoard().findTile(rowIndex, colIndex))) {
                         System.out.println("test" + model.returnBoard().findTile(rowIndex, colIndex));
-                        
-                      System.out.println("ggggg "  + model.returnBoard().findTile(rowIndex, colIndex));
-                    
-                        
+
+                        System.out.println("ggggg " + model.returnBoard().findTile(rowIndex, colIndex));
+
                         grid.getChildren().remove(rect);
                         grid.getChildren().remove(text);
                         grid.add(rect, model.returnBoard().getTile(0).getColumn(), model.returnBoard().getTile(0).getRow());
                         grid.add(text, model.returnBoard().getTile(0).getColumn(), model.returnBoard().getTile(0).getRow());
-                         model.returnBoard().findTile(rowIndex, colIndex).setPos(model.returnBoard().getTile(0).getRow(), model.returnBoard().getTile(0).getColumn());
+                        model.returnBoard().findTile(rowIndex, colIndex).setPos(model.returnBoard().getTile(0).getRow(), model.returnBoard().getTile(0).getColumn());
 
-                       model.returnBoard().getTile(0).setColumn(colIndex);
-                       model.returnBoard().getTile(0).setRow(rowIndex);
-     
+                        model.returnBoard().getTile(0).setColumn(colIndex);
+                        model.returnBoard().getTile(0).setRow(rowIndex);
+                        System.out.println(model.returnBoard().isDone());
                     }
                     System.out.println(model.returnBoard().checkMoveOk(model.returnBoard().findTile(rowIndex, colIndex)));
 
@@ -99,30 +98,25 @@ public class UI extends Application {
 
                     if (model.returnBoard().checkMoveOk(model.returnBoard().findTile(rowIndex, colIndex))) {
                         System.out.println("hej" + model.returnBoard().findTile(rowIndex, colIndex));
-                                           
+
                         grid.getChildren().remove(rect);
                         grid.getChildren().remove(text);
                         grid.add(rect, model.returnBoard().getTile(0).getColumn(), model.returnBoard().getTile(0).getRow());
                         grid.add(text, model.returnBoard().getTile(0).getColumn(), model.returnBoard().getTile(0).getRow());
-                       
-                        
+
                         model.returnBoard().findTile(rowIndex, colIndex).setPos(model.returnBoard().getTile(0).getRow(), model.returnBoard().getTile(0).getColumn());
                         model.returnBoard().getTile(0).setColumn(colIndex);
-                       model.returnBoard().getTile(0).setRow(rowIndex);
+                        model.returnBoard().getTile(0).setRow(rowIndex);
+                        System.out.println(model.returnBoard().isDone());
                     }
                     System.out.println(model.returnBoard().checkMoveOk(model.returnBoard().findTile(rowIndex, colIndex)));
                 }
             });
         }
 
-        //Button
-        Button btn = new Button("reset");
-        HBox hbBtn = new HBox(10);
-        hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
-        hbBtn.getChildren().add(btn);
-        grid.add(hbBtn, 3, 4);
 
-        Scene scene = new Scene(grid, 400, 400);
+
+        Scene scene = new Scene(grid, 350, 350);
         primaryStage.setScene(scene);
         primaryStage.show();
 
