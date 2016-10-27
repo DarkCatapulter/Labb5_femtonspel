@@ -1,5 +1,5 @@
-
 package Model;
+
 import java.util.ArrayList;
 
 /**
@@ -10,17 +10,19 @@ public class Board {
 
     private final ArrayList<Tile> tiles;
     Tile tile;
-/**
- *  Constructor take no parrameters and creates a new full array with tiles
- */
+
+    /**
+     * Constructor take no parrameters and creates a new full array with tiles
+     */
     public Board() {
         tiles = new ArrayList<>();
         initBoard();
-    
+
     }
-/**
- * Initalize the board in finnished state
- */
+
+    /**
+     * Initalize the board in finnished state
+     */
     private void initBoard() {
         int column = 0, row = 1;
         tiles.add(new Tile(0, 3, 4));
@@ -37,6 +39,7 @@ public class Board {
         }
 
     }
+
     /**
      * Empty the tiles array and fill int with scrambled tiles
      */
@@ -44,17 +47,20 @@ public class Board {
         tiles.removeAll(tiles);
         initBoardPreSet();
     }
-/**
- * 
- * @return arraylist tiles
- */
+
+    /**
+     *
+     * @return arraylist tiles
+     */
     public ArrayList<Tile> getBoard() {
         return tiles;
     }
- /**
-  * adds a tile to the arraylist tiles
-  * @param tile 
-  */
+
+    /**
+     * adds a tile to the arraylist tiles
+     *
+     * @param tile
+     */
     public void addTile(Tile tile) {
         tiles.add(tile);
     }
@@ -74,43 +80,47 @@ public class Board {
     private void setGreyRow(int row) {
         tiles.get(0).setRow(row);
     }
-/**
- * get tile at specified index
- * @param index
- * @return tile
- */
+
+    /**
+     * get tile at specified index
+     *
+     * @param index
+     * @return tile
+     */
     public Tile getTile(int index) {
         return tiles.get(index);
     }
-/**
- * check if all the tiles are in correct position
- * @return boolean
- */
-   public boolean isDone() {
+
+    /**
+     * check if all the tiles are in correct position
+     *
+     * @return boolean
+     */
+    public boolean isDone() {
         int column = 0, row = 1;
         for (int i = 1; i < 16; i++) {
-            if(!(tiles.get(i).getColumn() == column && tiles.get(i).getRow() == row)){
+            if (!(tiles.get(i).getColumn() == column && tiles.get(i).getRow() == row)) {
                 return false;
             }
-            if (column == 2 && row == 4){
-                   
+            if (column == 2 && row == 4) {
+
                 return true;
-            }
-            else if (!(column == 3)) {
+            } else if (!(column == 3)) {
                 column++;
-            } 
-            else {
+            } else {
                 column = 0;
                 row++;
             }
         }
         return false;
     }
-/**
- * Checks if the tile that is clicked is located beside the the grey tile
- * @param other
- * @return boolean
- */
+
+    /**
+     * Checks if the tile that is clicked is located beside the the grey tile
+     *
+     * @param other
+     * @return boolean
+     */
     public boolean checkMoveOk(Tile other) {
         if (tiles.get(0).getColumn() == other.getColumn() || tiles.get(0).getRow() == other.getRow()) {
             if (tiles.get(0).getColumn() == other.getColumn() + 1
@@ -124,12 +134,14 @@ public class Board {
         return false;
 
     }
-/**
- * search after a tile in the arraylist using the tiles node position
- * @param row
- * @param col
- * @return 
- */
+
+    /**
+     * search after a tile in the arraylist using the tiles node position
+     *
+     * @param row
+     * @param col
+     * @return
+     */
     public Tile findTile(int row, int col) {
         Tile tmp = new Tile();
         for (Tile tile : tiles) {
@@ -142,10 +154,11 @@ public class Board {
         }
         return tmp;
     }
+
     /**
      * Initialize the board with scrambled tiles
      */
-   private void initBoardPreSet() {
+    private void initBoardPreSet() {
         int rand = 0;
         tiles.add(new Tile(0, 3, 4));
         rand = (int) (Math.random() * 3 + 1);
@@ -153,7 +166,7 @@ public class Board {
             case 1:
                 tiles.add(new Tile(1, 3, 1));
                 tiles.add(new Tile(2, 1, 3));
-                tiles.add(new Tile(3, 2, 3)); 
+                tiles.add(new Tile(3, 2, 3));
                 tiles.add(new Tile(4, 0, 4));
                 tiles.add(new Tile(5, 1, 1));
                 tiles.add(new Tile(6, 1, 4));
@@ -184,7 +197,7 @@ public class Board {
                 tiles.add(new Tile(14, 0, 1));
                 tiles.add(new Tile(15, 2, 2));
                 break;
-                
+
             case 3:
                 tiles.add(new Tile(1, 2, 1));
                 tiles.add(new Tile(2, 2, 2));
